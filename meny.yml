@@ -1,0 +1,123 @@
+                    menu_hot = menu_map[inp]
+(base) [root@tcentos CICD]# ls
+jenkins.jpg  menu.yml  readme.md  ymlMenu.py
+(base) [root@tcentos CICD]# cat menu.yml
+title: jenkins CI/CD
+child:
+- title: 生产应用-app1
+  config:
+    PROJ_NAME: eqqbank
+    ENV_NAME: develop
+    HOST_NAME: t203
+    APP_SVC: eqqbank
+  child:
+    - title: 备份
+      cmd: ["BACKUP"]
+    - title: 发布
+      cmd: ["DEPLOY", "RESTART"]
+    - title: 更新配置
+      cmd: ["CONFIG"]
+
+- title: 生产应用-app2
+  config:
+    PROJ_NAME: jing
+    ENV_NAME: product
+  child:
+    - title: 编译 & 发布内测
+      config:
+        HOST_NAME: jcj151.ali
+        APP_SVC: dfhxp3p
+      cmd: ["GIT", "DEPLOY", "CONFIG", "RESTART"]
+    - title: jcj254.ali:8083
+      config:
+        HOST_NAME: jcj254.ali
+        APP_SVC: p2priv
+      child:
+        - title: 备份
+          cmd: ["BACKUP"]
+        - title: 发布&重启
+          cmd: ["DEPLOY", "RESTART"]
+        - title: 回退
+          cmd: ["ROLLBACK", "RESTART"]
+    - title: jcj151.ali:8081 公开应用
+      config:
+        HOST_NAME: jcj151.ali
+        APP_SVC: dfhxp2p
+      child:
+        - title: 备份
+          cmd: ["BACKUP"]
+        - title: 发布&重启
+          cmd: ["DEPLOY", "RESTART"]
+        - title: 更新配置
+          cmd: ["DEPLOY", "CONFIG", "RESTART"]
+        - title: 回退
+          cmd: ["ROLLBACK", "RESTART"]
+    - title: jcj254.ali:8081 公开应用
+      config:
+        HOST_NAME: jcj254.ali
+        APP_SVC: dfhxp2p
+      child:
+        - title: 备份
+          cmd: ["BACKUP"]
+        - title: 发布&重启
+          cmd: ["DEPLOY", "RESTART"]
+        - title: 更新配置
+          cmd: ["DEPLOY", "CONFIG", "RESTART"]
+        - title: 回退
+          cmd: ["ROLLBACK", "RESTART"]
+
+- title: 生产应用-app2
+  config:
+    PROJ_NAME: uoxian
+    ENV_NAME: product
+  child:
+    - title: 编译 & 发布内测
+      config:
+        HOST_NAME: wfh99.ali
+        APP_SVC: mexian
+      cmd: ["GIT", "CONFIG", "DEPLOY", "RESTART"]
+    - title: uoxian 公开应用
+      config:
+        HOST_NAME: wfh99.ali
+        APP_SVC: uoxian
+      child:
+        - title: 备份
+          cmd: ["BACKUP"]
+        - title: 发布&重启
+          cmd: ["DEPLOY", "RESTART"]
+        - title: 更新配置
+          cmd: ["DEPLOY", "CONFIG", "RESTART"]
+        - title: 回退
+          cmd: ["ROLLBACK", "RESTART"]
+
+- title: 生产应用-app3
+  config:
+    PROJ_NAME: uxapp
+    ENV_NAME: product
+    HOST_NAME: wfh99.ali
+    APP_SVC: uxapp
+  child:
+    - title: 备份
+      cmd: ["BACKUP"]
+    - title: 发布&重启
+      cmd: ["DEPLOY", "RESTART"]
+    - title: 更新配置
+      cmd: ["DEPLOY", "CONFIG", "RESTART"]
+    - title: 回退
+      cmd: ["ROLLBACK", "RESTART"]
+
+- title: 生产应用-app4
+  config:
+    PROJ_NAME: yufenghang
+    ENV_NAME: product
+    HOST_NAME: yfh117.ali
+    APP_SVC: yfhang
+  child:
+    - title: 备份
+      cmd: ["BACKUP"]
+    - title: 发布&重启
+      cmd: ["DEPLOY", "RESTART"]
+    - title: 更新配置
+      cmd: ["DEPLOY", "CONFIG", "RESTART"]
+    - title: 回退
+      cmd: ["ROLLBACK", "RESTART"]
